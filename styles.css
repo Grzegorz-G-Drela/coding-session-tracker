@@ -51,7 +51,7 @@ html {
     justify-content: center;
 }
 
-#counter > p {
+#counter {
     /* padding-top: 30px; */
     font-size: 3rem;
 }
