@@ -5,28 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Coding Session Tracker</title>
     <link rel="stylesheet" href="./styles.css">
-    <script src="./script.js" defer></script>
 </head>
 <body>
     
-<div id="main">
-    <div id="middle">
-        <div id="mid-top">
-            <p>Session</p>
-            <div class="buttons">
-                <button class="button start-button">START</button>
-                <button class="button end-button">END</button>
-                <button class="button reset-button">RESET</button>
+    <div id="main">
+        <div id="middle">
+            <div id="mid-top">
+                <p>Session</p>
+                <div class="buttons">
+                    <button class="button start-button">START</button>
+                    <button class="button end-button">END</button>
+                    <button class="button reset-button">RESET</button>
+                </div>
+            </div>
+            <div id="mid-bottom">
+                <div id="counter"> 00:00:00 </div>
             </div>
         </div>
-        <div id="mid-bottom">
-            <div id="counter"> 00:00:00 </div>
+        <div>
+            <ul id="sessionList"></ul>
         </div>
     </div>
-    <div>
-        <ul id="storage"></ul>
-    </div>
-</div>
-
+    
+    <script src="./script.js" defer></script>
 </body>
 </html>
