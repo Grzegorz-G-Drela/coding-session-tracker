@@ -18,7 +18,7 @@ function startCounting() {
             intervalID = setInterval(function() {
             seconds += 1;
             secMinHou(seconds);
-        }, 10);
+        }, 100);
         startButton.textContent = 'PAUSE';
     } else if (typeof(intervalID) === 'number') {
         clearInterval(intervalID);
@@ -51,6 +51,19 @@ function secMinHou(totalSeconds) {
     let hours = Math.floor(totalSeconds/3600);
     let hoursRest = totalSeconds%3600;
     let minutes = Math.floor(hoursRest/60);
-    let minutesRest = hoursRest%60; // seconds
-    counter.textContent = `${hours}:${minutes}:${minutesRest}`;
+    let seconds = hoursRest%60; // seconds
+
+    let h = leadingZero(hours);
+    let m = leadingZero(minutes);
+    let s = leadingZero(seconds);
+
+    counterDisplay.textContent = `${h}:${m}:${s}`;
+}
+
+function leadingZero (num) {
+    let text = num.toString();
+    if (text.length === 1) {
+        text = "0" + text;
+    }
+    return text;
 }
