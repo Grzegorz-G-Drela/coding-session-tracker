@@ -17,8 +17,8 @@ function startCounting() {
     if (intervalID === null) {
             intervalID = setInterval(function() {
             seconds += 1;
-            counterDisplay.textContent = seconds;
-        }, 1000);
+            secMinHou(seconds);
+        }, 10);
         startButton.textContent = 'PAUSE';
     } else if (typeof(intervalID) === 'number') {
         clearInterval(intervalID);
@@ -30,7 +30,7 @@ function startCounting() {
 function resetCounter() {
     console.log('reset button clicked');
     seconds = 0;
-    counterDisplay.textContent = seconds;
+    secMinHou(seconds);
     startButton.textContent = 'START';
     if (intervalID !== null) {
         clearInterval(intervalID);
@@ -39,12 +39,18 @@ function resetCounter() {
 }
 
 function endSession() {
-    console.log('endSession button clicked');
-
     if (seconds !== 0) {
         let session = document.createElement('li');
         storage.appendChild(session);
-        session.textContent = seconds;
+        session.textContent = counter.textContent;
         resetCounter();
     }
+}
+
+function secMinHou(totalSeconds) {
+    let hours = Math.floor(totalSeconds/3600);
+    let hoursRest = totalSeconds%3600;
+    let minutes = Math.floor(hoursRest/60);
+    let minutesRest = hoursRest%60; // seconds
+    counter.textContent = `${hours}:${minutes}:${minutesRest}`;
 }
