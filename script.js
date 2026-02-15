@@ -14,6 +14,9 @@ let seconds = 0;
 let intervalID = null;
 let sessions = JSON.parse(localStorage.getItem('sessions')) || [];
 
+const todaysDate = Date();
+
+
 sessions.forEach(function(sessionsElement) {
     let li = document.createElement('li');
     li.textContent = sessionsElement;
@@ -21,7 +24,7 @@ sessions.forEach(function(sessionsElement) {
 });
 
 function startCounting() {
-    console.log('start/pause button clicked');
+    console.log('start/pause/resume');
     if (intervalID === null) {
             intervalID = setInterval(function() {
             seconds += 1;
@@ -36,7 +39,7 @@ function startCounting() {
 }
 
 function resetCounter() {
-    console.log('reset button clicked');
+    console.log('reset');
     seconds = 0;
     secMinHou(seconds);
     startButton.textContent = 'START';
@@ -52,9 +55,9 @@ function endSession() {
         sessionList.appendChild(session);
         session.textContent = counter.textContent;
         resetCounter();
-        let save = session.textContent;
+        variable = relativeDate(todaysDate);
         
-        sessions.push(save);
+        sessions.push({duration: counter.textContent, startTime: todaysDate});
         localStorage.setItem('sessions', JSON.stringify(sessions));
     }
 }
@@ -72,10 +75,51 @@ function secMinHou(totalSeconds) {
     counterDisplay.textContent = `${h}:${m}:${s}`;
 }
 
-function leadingZero (num) {
+function leadingZero(num) {
     let text = num.toString();
     if (text.length === 1) {
         text = "0" + text;
     }
     return text;
+}
+
+let formatted = {};
+
+function formatDate(unformattedDate) {
+    year = unformattedDate.getYear();
+    month = unformattedDate.getMonth();
+    day = unformattedDate.getDate();
+
+    formatted.year = year;
+    formatted.month = month;
+    formatted.day = day;
+}
+
+let wayToPresentDate = "";
+
+function compareDates (sessionDate, actualDate) {
+    if (sessionDate.year === actualDate.year &&
+    sessionDate.month === actualDate.month &&
+    sessionDate.day === actualDate.day) {
+        dayPresented = "Today";
+    } else if (sessionDate.year === actualDate.year &&
+    sessionDate.month === actualDate.month &&
+    sessionDate.day === (actualDate.day-1)) {
+        dayPresented = "Yesterday";
+    } else {
+        dayPresented = sessionDate.getDay();
+    }
+}
+
+function relativeDate (timestamp) {
+    //format the date before, you spoiled it before, so i need to strip the time:
+    formatedTimestamp = formatDate(timestamp);
+    formattedNowDate = formatDate(nowDate);
+    if (formatedTimestamp === formattedNowDate) {
+        // today
+    } else if (formatedTimestamp === formattedNowDate("-1 day") {
+        // yesterday
+    } else {
+        // day of the week
+    }
 }
