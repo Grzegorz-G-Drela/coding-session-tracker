@@ -106,18 +106,20 @@ function formatDate(unformattedDate) {
 
 function compareDates(sessionDate, actualDate) {
     let dayPresented;
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
+    
     if (sessionDate.year === actualDate.year &&
     sessionDate.month === actualDate.month &&
     sessionDate.day === actualDate.day) {
         dayPresented = "Today";
     } else if (sessionDate.year === actualDate.year &&
-    sessionDate.month === actualDate.month &&
-    sessionDate.day === (actualDate.day-1)) {
+        sessionDate.month === actualDate.month &&
+        sessionDate.day === (actualDate.day-1)) {
         dayPresented = "Yesterday";
     } else {
-        dayPresented = sessionDate.getDay();
+        dayPresented = sessionDate.day + ' ' + months[sessionDate.month];
     }
-    
+
     return dayPresented;
 }
