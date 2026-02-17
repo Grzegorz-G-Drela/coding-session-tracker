@@ -14,8 +14,7 @@ let seconds = 0;
 let intervalID = null;
 let sessions = JSON.parse(localStorage.getItem('sessions')) || [];
 
-const startSessionDate = Date();
-
+let startSessionDate;
 
 sessions.forEach(function(sessionsElement) {
     let li = document.createElement('li');
@@ -32,6 +31,8 @@ sessions.forEach(function(sessionsElement) {
 
 function startCounting() {
     console.log('start/pause/resume');
+    startSessionDate = new Date();
+
     if (intervalID === null) {
             intervalID = setInterval(function() {
             seconds += 1;
@@ -63,7 +64,7 @@ function endSession() {
         session.textContent = counter.textContent;
         resetCounter();
         
-        sessions.push({duration: counter.textContent, startTime: startSessionDate});
+        sessions.push({duration: session.textContent, startTime: startSessionDate});
         localStorage.setItem('sessions', JSON.stringify(sessions));
     }
 }
